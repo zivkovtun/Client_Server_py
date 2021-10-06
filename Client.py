@@ -2,7 +2,10 @@
 import socket
 
 port = 5050
+
 disconnect_msg = "Disconnect!"
+
+#formt to encode and decode messages to byte form.
 format = 'utf-8'
 
 ServerIp = input("Enter ipv4 format of server, "
@@ -13,10 +16,12 @@ else:
     ServerIp = input("Enter Ip: ")
 
 addr = (ServerIp,port)
-
+#Creating socket object
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(("127.0.0.1",5050))
+#binding client socket with tuple of port number and ipv4 string.
+client.connect(addr)
 
+#function to send messages to server and print ans.
 def send(msg):
     client.send(msg.encode(format))
     print(client.recv(4096).decode(format))
